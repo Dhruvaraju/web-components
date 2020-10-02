@@ -275,3 +275,10 @@ Particularly important in this course are:
 
     splice()  => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 
+## Core specifications of web-components or custom html elements
+- Web components are build by considering group of 5 specifications
+- HTML imports are no longer supported.
+- The specifications are explained in the below image
+- To know about browser compatibility and get additional resources go to [web-components-org](https://www.webcomponents.org/)
+
+![Web-component-specifications](images/web-component-specs.svg)
