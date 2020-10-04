@@ -249,11 +249,12 @@ const newTest = (...abc) => {
 };
 console.log(newTest(1, 2, 3, 4));
 ```
+
 > Array in java script have multiple function on it reference can be found at [Morzilla Array ref](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). Like map, pop, push.
 
 ### JS Array Functions
 
-Not really next-gen JavaScript, but also important: JavaScript array functions like map() , filter() , reduce()  etc.
+Not really next-gen JavaScript, but also important: JavaScript array functions like map() , filter() , reduce() etc.
 
 The following page gives a good overview over the various methods you can use on the array prototype - feel free to click through them and refresh your knowledge as required: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 
@@ -276,9 +277,65 @@ Particularly important in this course are:
     splice()  => https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
 
 ## Core specifications of web-components or custom html elements
+
 - Web components are build by considering group of 5 specifications
 - HTML imports are no longer supported.
 - The specifications are explained in the below image
 - To know about browser compatibility and get additional resources go to [web-components-org](https://www.webcomponents.org/)
 
 ![Web-component-specifications](images/web-component-specs.svg)
+
+## Custom elements
+
+- Can be created in 2 ways
+  - Autonomous
+    - Which are completely on their own new tags.
+  - Extended elements - Which are derived from existing html tags
+    > Autonomous custom elements are more preferred for creating web components.
+
+## Basic setup required for creating a web component
+
+A html file and a javascript file is required as the code content for building web-component is written in the js file.
+In this project we will take a tool tip creation as a base project. 'tool-tip-web-component' folder will have a home.html and a tool-tip.js file. Import the js file in html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tool Tip demo</title>
+    <script src="tool-tip.js"></script>
+  </head>
+  <body></body>
+</html>
+```
+
+## Create a custom html tag
+
+- To register our custom element we need to create a tag and class that will be invoked by the tag.
+- That class should extend HTMLElement class.
+- we need to instantiate a constructor, to run the constructor code of HTMLElement, class we need to use default super method.
+- To register the custom element invoke define function on customElements and provide the tag name and class that supports the tag.
+- tag should be mentioned in the body of html, to instantiate the class.
+
+```html
+<dc-tooltip></dc-tooltip>
+```
+
+```javascript
+class ToolTip extends HTMLElement {
+  constructor() {
+    super();
+    console.log("Initiating constructor");
+  }
+}
+// For registering custom html tag
+customElements.define("dc-tooltip", ToolTip);
+```
+
+### Restrictions on tag name
+
+- The tag name should not be a single word, as those are allocated for predefined HTML tags
+- Should have at least two words separated by an '-'.
+- Provide a proper and meaningful name, generally prefix the organization name will be prefixed.
