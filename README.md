@@ -1,4 +1,25 @@
-# web-components
+# web-components- [web-components](#web-components)
+  - [What are web components?](#what-are-web-components)
+  - [why do we need web components:](#why-do-we-need-web-components)
+  - [Comparing web components with frameworks and libraries](#comparing-web-components-with-frameworks-and-libraries)
+    - [Libraries](#libraries)
+    - [Frameworks](#frameworks)
+    - [Web-components](#web-components-1)
+  - [Javascript ES6](#javascript-es6)
+    - [let and const key words](#let-and-const-key-words)
+    - [Arrow function](#arrow-function)
+    - [import and exports](#import-and-exports)
+    - [Classes](#classes)
+    - [Usage of classes, properties and methods](#usage-of-classes-properties-and-methods)
+    - [Spread and rest operator '...'](#spread-and-rest-operator-)
+      - [Spread](#spread)
+      - [rest](#rest)
+    - [JS Array Functions](#js-array-functions)
+  - [Core specifications of web-components or custom html elements](#core-specifications-of-web-components-or-custom-html-elements)
+  - [Custom elements](#custom-elements)
+  - [Basic setup required for creating a web component](#basic-setup-required-for-creating-a-web-component)
+  - [Create a custom html tag](#create-a-custom-html-tag)
+    - [Restrictions on tag name](#restrictions-on-tag-name)
 
 What are web-components, how to create and work with them.
 
