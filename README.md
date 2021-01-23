@@ -1,10 +1,12 @@
 # web-components- [web-components](#web-components)
+
+- [web-components- web-components](#web-components--web-components)
   - [What are web components?](#what-are-web-components)
   - [why do we need web components:](#why-do-we-need-web-components)
   - [Comparing web components with frameworks and libraries](#comparing-web-components-with-frameworks-and-libraries)
     - [Libraries](#libraries)
     - [Frameworks](#frameworks)
-    - [Web-components](#web-components-1)
+    - [Web-components](#web-components)
   - [Javascript ES6](#javascript-es6)
     - [let and const key words](#let-and-const-key-words)
     - [Arrow function](#arrow-function)
@@ -20,6 +22,12 @@
   - [Basic setup required for creating a web component](#basic-setup-required-for-creating-a-web-component)
   - [Create a custom html tag](#create-a-custom-html-tag)
     - [Restrictions on tag name](#restrictions-on-tag-name)
+  - [Web-component life cycle](#web-component-life-cycle)
+  - [Adding elements to custom tag and](#adding-elements-to-custom-tag-and)
+  - [Updating custom element](#updating-custom-element)
+    - [Adding events and behaving as per events](#adding-events-and-behaving-as-per-events)
+    - [functions getAttribute, hasAttribute](#functions-getattribute-hasattribute)
+    - [Basic Styling](#basic-styling)
 
 What are web-components, how to create and work with them.
 
@@ -360,10 +368,71 @@ customElements.define("dc-tooltip", ToolTip);
 - The tag name should not be a single word, as those are allocated for predefined HTML tags
 - Should have at least two words separated by an '-'.
 - Provide a proper and meaningful name, generally prefix the organization name will be prefixed.
-  
+
 ## Web-component life cycle
 
 - We need to create a component, then attach it to DOM, next listen to the attribute changes in the custom element and around it, finally detaching the component from DOM.
 - The functions that are used and what can be done in the functions are explained in the below image.
-![Web Component Life-cycle](images/web-component-lifecycle.png)
- 
+  ![Web Component Life-cycle](images/web-component-lifecycle.png)
+
+## Adding elements to custom tag and
+
+- Create a `connectedCallback()` function and then create a new html element and append it to your component.
+- Create a new html span element and add '(?)' as text content for it, as mentioned below. This will append a (?) at the starting of the tooltip we created.
+
+```javascript
+connectedCallback() {
+        const toolTipIcon = document.createElement('span');
+        toolTipIcon.textContent = '(?)';
+        this.appendChild(toolTipIcon);
+    }
+```
+
+## Updating custom element
+
+### Adding events and behaving as per events
+
+To make the tool tip to appear on mouse hover and remove the tool tip text on moving away from tool tip, We need to add event listeners and corresponding functions. Below mentioned is an example of the event listeners and corresponding functions. The variable `_toolTipContainer` should be defined in the constructor. So it can be accessed from multiple functions.
+
+```javascript
+toolTipIcon.addEventListener("mouseover", this._showToolTip.bind(this));
+toolTipIcon.addEventListener("mouseleave", this._hideToolTip.bind(this));
+
+_showToolTip() {
+    this._toolTipContainer = document.createElement("div");
+    this._toolTipContainer.textContent = "Tool tip text will appear here";
+    this.appendChild(this._toolTipContainer);
+  }
+
+_hideToolTip() {
+    this.removeChild(this._toolTipContainer);
+  }
+```
+
+### functions getAttribute, hasAttribute
+
+Used for fetching attributes assigned to a web-component, accessing its value. If we added a new attribute to the tag which we created, we can get its value using `this.getAttribute('attributeName')`. We can also check if the attribute is present or not on a component by using `this.hasAttribute('attributeName')`.
+
+```
+//HTML
+<dc-tooltip text="Text provided from tooltip attribute">Test</dc-tooltip>
+
+//Script-file
+this._toolTipText = this.getAttribute("text"); // Fetching value
+this.hasAttribute("text") // returns true if it exists else false
+```
+
+### Basic Styling
+
+We can add styling to out custom tags by accessing the style attribute and assign individual variables, like colour, background colour, font etc., Example is provided below. This way of adding style has few cons.
+
+- We need to write each style attribute in a single line.
+- Global styles will be effecting the style of child components.
+  - This is because our custom tag is a child tag of main dom
+    > To avoid this we can enable shadow DOM.
+
+```javascript
+this._toolTipContainer.style.backgroundColor = "orange";
+this._toolTipContainer.style.color = "white";
+this._toolTipContainer.style.position = "absolute";
+```
