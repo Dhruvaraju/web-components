@@ -360,3 +360,10 @@ customElements.define("dc-tooltip", ToolTip);
 - The tag name should not be a single word, as those are allocated for predefined HTML tags
 - Should have at least two words separated by an '-'.
 - Provide a proper and meaningful name, generally prefix the organization name will be prefixed.
+  
+## Web-component life cycle
+
+- We need to create a component, then attach it to DOM, next listen to the attribute changes in the custom element and around it, finally detaching the component from DOM.
+- The functions that are used and what can be done in the functions are explained in the below image.
+![Web Component Life-cycle](images/web-component-lifecycle.png)
+ 
